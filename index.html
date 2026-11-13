@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Permission Lens — Know what can access your NEAR account</title>
+<meta name="description" content="A read-only NEAR wallet permission checker that explains access keys in plain language.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>🔐 Permission Lens</h1>
+  <p class="pitch">Know what can access your NEAR account — before you trust it with more money.</p>
+  <p class="safe">Read-only. We never ask for a seed phrase or private key, and nothing you type here is stored or sent anywhere except the public NEAR network.</p>
+</header>
+
+<main>
+  <form id="lookup" aria-label="Account lookup">
+    <div class="row">
+      <label>Network
+        <select id="network">
+          <option value="testnet" selected>Testnet</option>
+          <option value="mainnet">Mainnet</option>
+        </select>
+      </label>
+      <label class="grow">NEAR account ID
+        <input id="account" type="text" placeholder="example.testnet" autocomplete="off" spellcheck="false" required>
+      </label>
+      <button type="submit">Check permissions</button>
+    </div>
+    <p class="examples">Try:
+      <button type="button" class="chip" data-net="testnet" data-acct="example.testnet">example.testnet (testnet)</button>
+      <button type="button" class="chip" data-net="mainnet" data-acct="alice.near">alice.near (mainnet)</button>
+    </p>
+  </form>
+
+  <p id="status" role="status" aria-live="polite"></p>
+  <section id="summary" hidden></section>
+  <section id="cards" aria-label="Permission cards"></section>
+
+  <section id="guide" hidden>
+    <h2>Before you remove any key</h2>
+    <ul>
+      <li>Removing a key is done in your wallet or with NEAR CLI — Permission Lens cannot remove keys, by design.</li>
+      <li>Never remove your only full-access key. First make sure you have your seed phrase or another full-access key you control, or you can lock yourself out.</li>
+      <li>Start with app keys for apps you no longer use. Check the contract name on the card against the app you remember using.</li>
+      <li>If you do not recognise a full-access key, move funds to a new account first, then sort out the old one.</li>
+    </ul>
+    <p><button type="button" id="copy">Copy text summary</button> <span id="copied" role="status"></span></p>
+  </section>
+</main>
+
+<footer>
+  <p>Built for NEAR Hackathon 2026 · Track: AI Security &amp; Defense · Data comes live from public NEAR RPC (<code>view_access_key_list</code>). No backend, no tracking.</p>
+</footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>
